@@ -2,49 +2,36 @@
 #include <assert.h>
 
 
-#define LEN(x) (sizeof(x)/sizeof(x[0]))
-
 int main(void){
-  const int banknoty[5] = {200, 100, 50, 20, 10};
-  const int n_banknoty = LEN(banknoty);
-  const int monety_zl[3] = {5, 2, 1};
-  const int n_monety_zl = LEN(monety_zl);
-  const int monety_gr[6] = {50, 20, 10, 5, 2, 1};
-  const int n_monety_gr = LEN(monety_gr);
+  const int nominaly[] = {20000, 10000, 5000, 2000, 1000, 
+    500, 200, 100, 50, 20, 10, 5, 2, 1}; // nominaly monet i banktow w gr, malejaco
+  const int n_nominaly = (sizeof(nominaly)/sizeof(nominaly[0]));
+  const int najwieksza_moneta = 500; //najwiekszy nominal monety wynosi 5zl = 500gr
   
-  int kwota_zl, kwota_gr;
+  int zl, gr;
   printf("podaj liczbę złotych: ");
-  scanf("%d", &kwota_zl);
+  scanf("%d", &zl);
   printf("podaj liczbę groszy: ");
-  scanf("%d", &kwota_gr);
-  assert(kwota_zl >= 0);
-  assert(kwota_gr >= 0);
-  assert(kwota_gr < 100);
+  scanf("%d", &gr);
+  assert(zl >= 0);
+  assert(gr >= 0);
+  
+  gr += 100 * zl;
 
   printf("banknoty: \n");
-  for(int i = 0; i<n_banknoty; i++){
-    int nominal = banknoty[i];
-    int liczba = kwota_zl / nominal;
-    kwota_zl -= nominal * liczba;
-    if(liczba)
-      printf("\t%d x %d zł\n", liczba, nominal);
-  }
+  for(int i = 0; i<n_nominaly; i++){
+    int nominal = nominaly[i];
+    int liczba = gr / nominal;
+    gr -= nominal * liczba;
 
-  printf("monety: \n");
-  for(int i = 0; i<n_monety_zl; i++){
-    int nominal = monety_zl[i];
-    int liczba = kwota_zl / nominal;
-    kwota_zl -= nominal * liczba;
-    if(liczba)
-      printf("\t%d x %d zł\n", liczba, nominal);
-  }
-
-  for(int i = 0; i<n_monety_gr; i++){
-    int nominal = monety_gr[i];
-    int liczba = kwota_gr / nominal;
-    kwota_gr -= nominal * liczba;
-    if(liczba)
-      printf("\t%d x %d gr\n", liczba, nominal);
+    if(nominal == najwieksza_moneta)
+      printf("monety: \n");
+    if(liczba){
+      if(nominal >= 100)
+        printf("\t%d x %d zł\n", liczba, nominal / 100);
+      else
+        printf("\t%d x %d gr\n", liczba, nominal);
+    }
   }
   return 0;
 }

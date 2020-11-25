@@ -5,6 +5,7 @@ int gcd(int a, int b){
 }
 
 
+// zadanie 5 - lujowa zlozonosc obliczeniowa O(n^3), polecam zad51.c
 int main(void){
   printf("n;ratio\n");
 

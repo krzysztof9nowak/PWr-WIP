@@ -3,9 +3,12 @@
 #include <string.h>
 
 
-#define N 1000000000
+#define N 100000
 
 bool sito[N];
+
+
+//wyliczanie liczby z zadanie 5, ale jeszcze szybciej
 int main(){
   double wspl_pierwszosci = 1.0;
   double last=0;
