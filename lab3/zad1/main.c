@@ -1,20 +1,15 @@
 #include <stdio.h>
-#include "palindrom.h"
-
-void testuj(char napis[]){
-    printf("\"%s\"", napis);
-    if(palindrom(napis))
-        printf(" to palindrom\n");
-    else
-        printf(" to nie palindrom\n");
-}
+#include "funs.h"
 
 
 int main(){
-    testuj("ala");
+    testuj("ada");
+    testuj("Ada");
     testuj("");
     testuj("krowa");
     testuj("abba");
     testuj("abab");
+    testuj("c");
+    testuj("\n$\n");
     return 0;
 }

@@ -1,4 +1,4 @@
-#include "palindrom.h"
+#include "funs.h"
 
 bool palindrom(char napis[]){
     int n = strlen(napis);

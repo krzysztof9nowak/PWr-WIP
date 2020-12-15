@@ -1,5 +1,5 @@
 #include "funs.h"
 
-double f_badana(double x){
+double f(double x){
     return cos(x/2.0);
 }

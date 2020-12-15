@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-Wextra -pedantic -std=c11
-LDFLAGS=-lm
+CFLAGS=-Wextra -pedantic -std=c17 #-g
+LDFLAGS=-lm #-g
 
 SRC = ${wildcard *.c}
 OBJ = ${patsubst %.c, build/%.o, ${SRC}}
