@@ -11,5 +11,12 @@
 			"program": "${workspaceFolder}/pseudo_regex",
 			"cwd": "${workspaceFolder}",
         },
+        {
+			"name": "(gdb) Mastermind",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/mastermind",
+			"cwd": "${workspaceFolder}",
+        },
     ]
 }
