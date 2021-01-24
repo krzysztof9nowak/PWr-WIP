@@ -2,7 +2,6 @@ from collections import Counter
 codes = []
 
 def generate_all_posible_codes(dim, array):
-    # print(dim)
     if dim == 0:
         codes.append(array)
         return
@@ -15,9 +14,7 @@ def count_matching_colors(a, b):
     matches = 0
     a = Counter(a)
     b = Counter(b)
-    # print(a.items(), b.items())
     for color, count in a.items():
-        # print(color, count)
         if color in b:
             matches += min(count, b[color])
     return matches
@@ -34,11 +31,11 @@ def match(a, b, col, pos):
 
 generate_all_posible_codes(4, [])
 while len(codes) > 1:
-    print(f"Left {len(codes)}")
+    print(f"Pozostało {len(codes)} potencjalnych kodów")
     guess = codes[0]
-    print(f"Guess {guess}")
-    pos = int(input("Matching pos: "))
-    colors = int(input("Matching only colors: "))
+    print(f"Zgaduję: {guess}")
+    pos = int(input("Red: "))
+    colors = int(input("White: "))
     codes = [x for x in codes if match(guess, x, colors, pos)]
 
 if len(codes) == 1:
