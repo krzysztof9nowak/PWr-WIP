@@ -48,7 +48,7 @@ void tests(){
     assert(match("al*", "ala ma kota"));
     assert(match("*ota", "ala ma kota"));
     assert(!match("*a", "k"));
-    assert(match("a*b*a", "abababababababababababa"));
+    assert(match("a*b*a", "abababababababababababa")); // z tresci zadania
     assert(!match("a*b*a","ababababababababababab"));
 }
 
