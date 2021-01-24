@@ -3,8 +3,6 @@ def match(pattern, sequence):
         return True
     if len(pattern) == 0:
         return False
-    if pattern[0] == '?':
-        return match(pattern[1:], sequence[1:])
     if pattern[0] == '*':
         if len(sequence) == 0:
             return match(pattern[1:], '')
@@ -12,7 +10,7 @@ def match(pattern, sequence):
             return match(pattern[1:], sequence[1:]) or match(pattern, sequence[1:])
     if len(sequence) == 0:
         return False
-    if pattern[0] == sequence[0]:
-        return match(pattern[1:], sequence[1:]) 
+    if pattern[0] == sequence[0] or pattern[0] == '?':
+        return match(pattern[1:], sequence[1:])
     return False
     
