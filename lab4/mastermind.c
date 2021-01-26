@@ -35,7 +35,7 @@ void list_append(struct ListNode **ptr, struct Code *code){
 int list_length(struct ListNode *ptr){
     int length = 0;
     while(ptr != NULL){
-        print_code(*(ptr->code));
+        // print_code(*(ptr->code));
         length++;
         ptr = ptr->next;
     }
@@ -44,9 +44,9 @@ int list_length(struct ListNode *ptr){
 
 void generate_problem_space_recursive(int dim, struct ListNode **ptr, struct Code basecode){
     if(dim == 0){
-        struct Code *newcode_heap = malloc(sizeof(struct Code));
-        memcpy(newcode_heap, &basecode, sizeof(struct Code));
-        list_append(ptr, newcode_heap);
+        struct Code *new_code_on_heap = malloc(sizeof(struct Code));
+        memcpy(new_code_on_heap, &basecode, sizeof(struct Code));
+        list_append(ptr, new_code_on_heap);
         return;
     }
     for(int i = 1; i <= number_of_colors; i++){
@@ -95,14 +95,29 @@ bool verify(struct Code codeA, struct Code codeB, int valid_red, int valid_white
 
 
 int main(){
-    struct ListNode *problemspace = generate_problem_space(code_length);
+    // utwórz listę wszystkich możliwych kodów
+    struct ListNode *possibilities_space = generate_problem_space(code_length);
     int turn_counter = 0;
-    while(list_length(problemspace) > 0){
-        printf("Moc przestrzeni: %d\n", list_length(problemspace));
-        struct Code guess = *(problemspace->code);
+
+    // główna pętla programu, wykonuje się dopóki pozostały jakiekolwiek możliwe kody
+    while(list_length(possibilities_space) > 0){
+        // printf("Moc przestrzeni: %d\n", list_length(possibilities_space));
+        
+        // w pierwszej turze zgadujemy kod 1212, w następnych podaje pierwszy element list
+        struct Code guess;
+        if(turn_counter == 0){
+            guess.elements[0] = 1;
+            guess.elements[1] = 2;
+            guess.elements[2] = 1;
+            guess.elements[3] = 2;
+        } else {
+            guess = *(possibilities_space->code);
+        }
+        
         printf("Zgaduję, że kod to: ");
         print_code(guess);
         turn_counter++;
+        
         int red, white;
         printf("Twoja odpowiedź: [czerwone] [białe]\n");
         scanf("%d %d", &red, &white);
@@ -116,9 +131,9 @@ int main(){
         }
 
 
-        struct ListNode **ptr = &problemspace;
+        // z listy usuwamy elementy, które nie spełniają warunku zdanego funkcją verify
+        struct ListNode **ptr = &possibilities_space;
         struct ListNode *tmp;
-
         while((*ptr) != NULL){
             struct Code code = *((*ptr)->code);
             bool valid = verify(guess, code, red, white);
