@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "Enabled",
     "files.associations": {
-        "system_error": "c"
+        "system_error": "c",
+        "ranges": "c"
     }
 }

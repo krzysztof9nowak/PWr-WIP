@@ -6,24 +6,19 @@
 bool match(char* pattern, char* sequence){
     if(strlen(pattern)==0 && strlen(sequence) == 0)
         return true;
-        
     if(strlen(pattern)==0)
         return false;
-
     if(strlen(sequence) == 0){
         if(pattern[0] == '*')
             return match(pattern + 1, sequence);
         return false;
     }
-
     // sequence i pattern są niepuste
     if(pattern[0] == '*')
         return match(pattern + 1, sequence + 1) || 
                match(pattern, sequence + 1);
-
     if(pattern[0] == sequence[0] || pattern[0] == '?')
         return match(pattern + 1, sequence + 1);
-
     return false;
 }
 

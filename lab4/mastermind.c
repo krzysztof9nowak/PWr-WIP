@@ -35,6 +35,7 @@ void list_append(struct ListNode **ptr, struct Code *code){
 int list_length(struct ListNode *ptr){
     int length = 0;
     while(ptr != NULL){
+        print_code(*(ptr->code));
         length++;
         ptr = ptr->next;
     }
@@ -62,12 +63,18 @@ struct ListNode *generate_problem_space(int dim){
 }
 
 bool verify(struct Code codeA, struct Code codeB, int valid_red, int valid_white){
+    if(codeB.elements[0]==1 && codeB.elements[1]==1 && codeB.elements[2]==2 && codeB.elements[3]==1){
+        int kek=0;
+    }
+        
     int red = 0;
-    bool used_elements[4] = {false};
+    bool used_elementsA[4] = {false};
+    bool used_elementsB[4] = {false};
     for(int i=0; i<code_length; i++)
         if(codeA.elements[i] == codeB.elements[i]){
             red++;
-            used_elements[i] = true;
+            used_elementsA[i] = true;
+            used_elementsB[i] = true;
         }
     if(red != valid_red)
         return false;
@@ -75,9 +82,10 @@ bool verify(struct Code codeA, struct Code codeB, int valid_red, int valid_white
     int white = 0;
     for(int i=0; i<code_length; i++){
         for(int j=0; j<code_length; j++){
-            if(!used_elements[i] && !used_elements[j] && codeA.elements[i] == codeB.elements[j]){
+            if(!used_elementsA[i] && !used_elementsB[j] && codeA.elements[i] == codeB.elements[j]){
                 white++;
-                used_elements[i] = true;
+                used_elementsA[i] = true;
+                used_elementsB[j] = true;
             }
         }
     }
@@ -90,7 +98,7 @@ int main(){
     struct ListNode *problemspace = generate_problem_space(code_length);
     int turn_counter = 0;
     while(list_length(problemspace) > 0){
-        // printf("Moc przestrzeni: %d\n", list_length(problemspace));
+        printf("Moc przestrzeni: %d\n", list_length(problemspace));
         struct Code guess = *(problemspace->code);
         printf("Zgaduję, że kod to: ");
         print_code(guess);

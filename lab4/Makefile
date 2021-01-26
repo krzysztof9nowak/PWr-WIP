@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-Wextra -pedantic -std=c17
-LDFLAGS=-lm #-static
+CFLAGS=-Wextra -pedantic -std=c17 -g
+LDFLAGS=-lm -g #-static -g
 
 SRCS=$(wildcard *.c)
 PROGS=$(basename $(SRCS))
